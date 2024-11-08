@@ -6,22 +6,16 @@ public class ShotgunScript : WeaponScript
 {
     protected override void WeaponConfigure()
     {
-        _ammo = 8;
-        _cd = 2f;
-        _currentCd = 0f;
-        _bulletSpeed = 60f;
-        _bulletDamage = 1f;
-        _bulletLifeTime = 3f;
+        _ammo = 16;
+        _cd = 0.75f;
+        _currentCd = 0f; 
+        _bulletSpeed = 40f;
+        _bulletDamage = 10f;
     }
 
-    protected override void Shot()
+    public override void Take()
     {
-        GameObject bullet = Instantiate(_bullet);
-        //Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GetComponent<Collider>());
-        bullet.transform.position = transform.GetChild(0).position;
-        Vector3 rotation = bullet.transform.rotation.eulerAngles;
-        bullet.transform.rotation = Quaternion.Euler(rotation.x, transform.eulerAngles.y, rotation.z);
-        bullet.GetComponent<Rigidbody>().AddForce(transform.GetChild(0).forward * _bulletSpeed, ForceMode.Impulse);
-        _currentCd = _cd;
+        Vector3 cameraPos = Camera.main.transform.position;
+        transform.parent.position = new Vector3(cameraPos.x + 0.2f, cameraPos.y - 0.1f, cameraPos.z + 0.4f);
     }
 }

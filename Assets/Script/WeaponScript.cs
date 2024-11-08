@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+public enum WeaponState
+{
+    Idle,
+    Shot
+}
+
 
 public class WeaponScript : MonoBehaviour
 {
@@ -13,15 +19,18 @@ public class WeaponScript : MonoBehaviour
     protected float _cd;
     protected float _bulletSpeed;
     protected float _bulletDamage;
-    protected float _bulletLifeTime;
     protected float _currentCd;
+    public WeaponState _state;
+    protected Animator _animator;
+
     // Start is called before the first frame update
     void Awake()
     {
+        _state = WeaponState.Idle;
         _input = new PlayerInput();
-        Vector3 cameraPos = Camera.main.transform.position;
-        transform.position = new Vector3(cameraPos.x + 0.4f, cameraPos.y - 0.6f, cameraPos.z + 9.3f);
+        _animator = GetComponent<Animator>();
         WeaponConfigure();
+        Take();
     }
 
     private void OnEnable()
@@ -38,8 +47,10 @@ public class WeaponScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_actionFire.IsPressed() && GotAmmo() && _currentCd == 0)
+        if (_actionFire.IsPressed() && GotAmmo() && _state == WeaponState.Idle)
         {
+            _state = WeaponState.Shot;
+            _animator.SetTrigger("isShotting");
             Shot();
         }
 
@@ -47,7 +58,10 @@ public class WeaponScript : MonoBehaviour
             _currentCd -= Time.deltaTime;
 
         if (_currentCd < 0)
+        {
+            _state = WeaponState.Idle;
             _currentCd = 0;
+        }
     }
 
     bool GotAmmo()
@@ -56,14 +70,19 @@ public class WeaponScript : MonoBehaviour
             return true;
         return false;
     }
-
-    virtual protected void WeaponConfigure()
-    { 
-
-    }
-
-    virtual protected void Shot()
+    public void Shot()
     {
-        
+        GameObject bullet = Instantiate(_bullet);
+        bullet.transform.position = transform.GetChild(0).position;
+        Vector3 rotation = bullet.transform.rotation.eulerAngles;
+        bullet.transform.rotation = Quaternion.Euler(rotation.x, transform.eulerAngles.y, rotation.z);
+        bullet.GetComponent<Rigidbody>().AddForce(transform.GetChild(0).forward * _bulletSpeed, ForceMode.Impulse);
+        _currentCd = _cd;
+        _ammo -= 1;
     }
+
+    virtual protected void WeaponConfigure(){}
+
+    virtual public void Take(){}
+
 }

@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 7888260766626496479}
   - component: {fileID: 4428466806558355520}
   - component: {fileID: 5768563893016674645}
+  - component: {fileID: -5328357415481533324}
   m_Layer: 0
-  m_Name: ShotgunBullet
+  m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5b0c89714de74774aa5464630a05e16b, type: 2}
+  - {fileID: 2100000, guid: 4ec99c2d0d244f54e9c643dcb3f9db78, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -130,8 +131,21 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-5328357415481533324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8382192450577367936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665540c114c5eaf49989cf408e307492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cd: 2
