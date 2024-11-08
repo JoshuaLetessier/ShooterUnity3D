@@ -6,6 +6,7 @@
 # Ignorer les hooks Git
 .git/hooks/post-commit
 
+
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
