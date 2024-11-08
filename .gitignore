@@ -2,6 +2,10 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
+
+# Ignorer les hooks Git
+.git/hooks/post-commit
+
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
