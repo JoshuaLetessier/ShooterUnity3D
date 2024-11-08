@@ -9,7 +9,7 @@ public class ShotgunScript : WeaponScript
         _ammo = 8;
         _cd = 2f;
         _currentCd = 0f;
-        _bulletSpeed = 1f;
+        _bulletSpeed = 60f;
         _bulletDamage = 1f;
         _bulletLifeTime = 3f;
     }

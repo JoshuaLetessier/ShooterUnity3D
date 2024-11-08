@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,6 +19,8 @@ public class WeaponScript : MonoBehaviour
     void Awake()
     {
         _input = new PlayerInput();
+        Vector3 cameraPos = Camera.main.transform.position;
+        transform.position = new Vector3(cameraPos.x + 0.4f, cameraPos.y - 0.6f, cameraPos.z + 9.3f);
         WeaponConfigure();
     }
 
